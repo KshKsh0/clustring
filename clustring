@@ -54,3 +54,27 @@ def Kmeans_alg(data, centroids):
 data=np.array([(0.5,1.5, 2 ,1 ),(1,0.5,2,0.5) , (2,1.5,1.5,1.5) , (0.5,1,2,2)])
 cent=np.array([(0.5,1.5,2,1),(1,0.5,2,0.5) , (2,1.5,1.5,1.5)])
 Kmeans_alg(data , cent)
+
+
+====
+
+
+def gram_schmidt(a):
+ q = []
+ for i in range(len(a)):
+#orthogonalization
+    q_tilde = a[i]
+    for j in range(len(q)):
+        q_tilde = q_tilde - (q[j] @ a[i])*q[j]
+#Test for dependennce
+
+    if np.sqrt(sum(q_tilde**2)) <= 1e-10:
+        print('Vectors are linearly dependent.')
+        print('GS algorithm terminates at iteration ', i+1)
+        return q
+#Normalization
+    else:
+     q_tilde = q_tilde / np.sqrt(sum(q_tilde**2))
+     q.append(q_tilde)
+ print('Vectors are linearly independent.')
+ return q
